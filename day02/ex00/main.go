@@ -1,7 +1,6 @@
 package main
 
 import (
-	walkfn "day02/ex00/walk-funcs"
 	"errors"
 	"flag"
 	"log"
@@ -30,7 +29,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	err = filepath.Walk(filePath, walkfn.WalkFunc)
+	err = filepath.Walk(filePath, WalkFunc)
 	if err != nil {
 		log.Fatal(err)
 	}
