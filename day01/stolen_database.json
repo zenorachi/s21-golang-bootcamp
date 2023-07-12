@@ -1,0 +1,44 @@
+{
+  "cake": [
+    {
+      "name": "Red Velvet Strawberry Cake",
+      "time": "45 min",
+      "ingredients": [
+        {
+          "ingredient_name": "Flour",
+          "ingredient_count": "2",
+          "ingredient_unit": "mugs"
+        },
+        {
+          "ingredient_name": "Strawberries",
+          "ingredient_count": "8"
+        },
+        {
+          "ingredient_name": "Coffee Beans",
+          "ingredient_count": "2.5",
+          "ingredient_unit": "tablespoons"
+        },
+        {
+          "ingredient_name": "Cinnamon",
+          "ingredient_count": "1"
+        }
+      ]
+    },
+    {
+      "name": "Moonshine Muffin",
+      "time": "30 min",
+      "ingredients": [
+        {
+          "ingredient_name": "Brown sugar",
+          "ingredient_count": "1",
+          "ingredient_unit": "mug"
+        },
+        {
+          "ingredient_name": "Blueberries",
+          "ingredient_count": "1",
+          "ingredient_unit": "mug"
+        }
+      ]
+    }
+  ]
+}
