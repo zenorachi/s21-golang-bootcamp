@@ -1,1 +1,2 @@
-# s21-golang-bootcamp
+# Golang s21-bootcamp
+This repository will host tasks from Golang s21-bootcamp
