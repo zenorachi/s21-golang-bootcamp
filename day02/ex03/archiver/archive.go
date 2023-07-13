@@ -16,7 +16,8 @@ func ArchiveFile(dir, fileName string, wg *sync.WaitGroup) {
 
 	dir = strings.TrimSuffix(dir, "/")
 	name := strings.Split(fileName, filepath.Ext(fileName))
-	path := fmt.Sprintf("%s/%s_%d.tar.gz", dir, name[0], time.Now().Unix())
+	name = strings.Split(name[0], "/")
+	path := fmt.Sprintf("%s/%s_%d.tar.gz", dir, name[len(name)-1], time.Now().Unix())
 	out, err := os.Create(path)
 	if err != nil {
 		log.Fatalln(err)
