@@ -4,6 +4,7 @@ import (
 	"errors"
 	"flag"
 	"log"
+	"sync"
 )
 
 type Flags struct {
@@ -26,6 +27,14 @@ func main() {
 		log.Fatal(err)
 	}
 
+	wg := new(sync.WaitGroup)
+	files := flag.Args()
+
+	for _, file := range files {
+		wg.Add(1)
+		go countThings(file, wg)
+	}
+	wg.Wait()
 }
 
 func checkFlags() error {
