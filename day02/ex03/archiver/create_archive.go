@@ -3,6 +3,7 @@ package archiver
 import (
 	"archive/tar"
 	"compress/gzip"
+	"io"
 	"log"
 	"os"
 )
@@ -22,4 +23,44 @@ func createArchive(path string, out *os.File) error {
 	tw := tar.NewWriter(gw)
 	defer free(gw, tw)
 
+	err := addData(tw, path)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func addData(tw *tar.Writer, path string) error {
+	file, err := os.Open(path)
+	if err != nil {
+		return err
+	}
+	defer func(f *os.File) {
+		if e := f.Close(); e != nil {
+			log.Fatalln(e)
+		}
+	}(file)
+
+	info, err := os.Stat(path)
+	if err != nil {
+		return err
+	}
+
+	header, err := tar.FileInfoHeader(info, info.Name())
+	if err != nil {
+		return err
+	}
+
+	header.Name = path
+	err = tw.WriteHeader(header)
+	if err != nil {
+		return err
+	}
+
+	_, err = io.Copy(tw, file)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

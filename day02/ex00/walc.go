@@ -31,7 +31,7 @@ func WalkFunc(path string, info os.FileInfo, err error) error {
 			fmt.Println(path)
 		}
 
-		if fl.d && info.Mode().IsDir() {
+		if fl.d && info.IsDir() {
 			fmt.Println(path)
 		}
 	}
