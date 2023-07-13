@@ -47,6 +47,10 @@ func checkFlags() error {
 		return errors.New(errTxt)
 	}
 
+	if !fl.l && !fl.m && !fl.w {
+		fl.w = true
+	}
+
 	return nil
 }
 
