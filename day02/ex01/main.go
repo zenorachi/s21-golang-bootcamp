@@ -3,7 +3,6 @@ package main
 import (
 	"errors"
 	"flag"
-	"fmt"
 	"log"
 )
 
@@ -26,16 +25,17 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("OK")
+
 }
 
 func checkFlags() error {
+	const errTxt = "ERROR: only one flag can be used"
 	if fl.l && fl.m && fl.w {
-		return errors.New("ERROR: only one flag can be used")
+		return errors.New(errTxt)
 	}
 
 	if (xor(fl.l, fl.m) && fl.w) || (xor(fl.m, fl.w) && fl.l) {
-		return errors.New("ERROR: only one flag can be used")
+		return errors.New(errTxt)
 	}
 
 	return nil
