@@ -29,12 +29,9 @@ func countThings(fileName string, wg *sync.WaitGroup) {
 	for scanner.Scan() {
 		l++
 		m += len(scanner.Bytes())
-		line := scanner.Text()
-		spaces := strings.Count(line, " ")
-		if spaces != 0 {
-			w += spaces + 1
-		}
+		w += len(strings.Fields(scanner.Text()))
 	}
+	m += l
 
 	printThing(l, m, w, fileName)
 }
