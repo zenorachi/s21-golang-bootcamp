@@ -5,17 +5,17 @@ import (
 	"os"
 )
 
-type Candy struct {
+type candy struct {
 	Name  string `json:"name"`
 	Price int64  `json:"price"`
 }
 
 type Candies struct {
-	Models []Candy `json:"candies"`
+	Models []candy `json:"candies"`
 }
 
 func (c *Candies) FillModels() error {
-	data, err := os.ReadFile("./config/config.json")
+	data, err := os.ReadFile("./candy-server/config/config.json")
 	if err != nil {
 		return err
 	}

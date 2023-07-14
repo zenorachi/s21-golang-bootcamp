@@ -13,14 +13,14 @@ type Server struct {
 func NewServer() *Server {
 	return &Server{
 		httpServer: http.Server{
-			Addr:    "localhost:8080",
+			Addr:    "127.0.0.1:8080",
 			Handler: &handler.Handler{},
 		},
 	}
 }
 
 func (s *Server) Run() error {
-	log.Println("start")
+	log.Println("server is running")
 	return s.httpServer.ListenAndServe()
 }
 
