@@ -193,7 +193,7 @@ func (o *BuyCandyBody) UnmarshalBinary(b []byte) error {
 type BuyCandyCreatedBody struct {
 
 	// change
-	Change int64 `json:"change,omitempty"`
+	Change int64 `json:"change"`
 
 	// thanks
 	Thanks string `json:"thanks,omitempty"`

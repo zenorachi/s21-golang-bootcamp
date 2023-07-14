@@ -24,7 +24,7 @@ type BuyCandyCreated struct {
 	/*
 	  In: Body
 	*/
-	Payload *BuyCandyCreatedBody `json:"body,omitempty"`
+	Payload *BuyCandyCreatedBody `json:"body"`
 }
 
 // NewBuyCandyCreated creates BuyCandyCreated with default headers values
