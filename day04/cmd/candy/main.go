@@ -1,17 +1,19 @@
 package main
 
 import (
+	"day04/config"
 	"day04/gen/restapi"
 	"day04/gen/restapi/operations"
-	"day04/model"
 	"flag"
+	"fmt"
 	"github.com/go-openapi/loads"
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/swag"
 	"log"
+	"net/http"
 )
 
-var candies model.Candies
+var candies config.Candies
 
 func main() {
 	var portFlag = flag.Int("port", 3000, "Port to run this service on")
@@ -32,26 +34,33 @@ func main() {
 		func(params operations.BuyCandyParams) middleware.Responder {
 			err := candies.FillModels()
 			if err != nil {
-				log.Println(err.Error())
-				// TODO: ???
-				return middleware.Error(400, nil, nil)
+				server.Logf("unexpected internal error\n")
+				return middleware.Error(http.StatusInternalServerError, nil, nil)
 			}
 
 			candyMap := candies.GetMapModels()
 
-			//money := swag.Int64Value(params.Order.Money)
+			money := swag.Int64Value(params.Order.Money)
 			candyType := swag.StringValue(params.Order.CandyType)
-			//candyCount := swag.Int64Value(params.Order.CandyCount)
+			candyCount := swag.Int64Value(params.Order.CandyCount)
 
-			if _, ok := candyMap[candyType]; !ok {
-				kek := &operations.BuyCandyBadRequestBody{Error: "oops... no such candies :("}
-				return operations.NewBuyCandyBadRequest().WithPayload(kek)
+			if _, ok := candyMap[candyType]; !ok || candyCount <= 0 {
+				badResp := &operations.BuyCandyBadRequestBody{Error: "oops... no such candies or invalid candies count :("}
+				return operations.NewBuyCandyBadRequest().WithPayload(badResp)
 			}
 
-			//greeting := fmt.Sprintf("Hello, %s!", name)
-			//return operations.NewGetGreetingOK().WithPayload(greeting)
+			if money < candyMap[candyType]*candyCount {
+				badResp := &operations.BuyCandyPaymentRequiredBody{
+					Error: fmt.Sprintf("You need %d more money!", candyCount*candyMap[candyType]-money),
+				}
+				return operations.NewBuyCandyPaymentRequired().WithPayload(badResp)
+			}
 
-			return nil
+			okResp := &operations.BuyCandyCreatedBody{
+				Change: money - (candyMap[candyType] * candyCount),
+				Thanks: "Thank you!",
+			}
+			return operations.NewBuyCandyCreated().WithPayload(okResp)
 		})
 
 	if err = server.Serve(); err != nil {

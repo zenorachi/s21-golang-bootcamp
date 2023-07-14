@@ -1,4 +1,4 @@
-package model
+package config
 
 import (
 	"encoding/json"
@@ -15,7 +15,7 @@ type Candies struct {
 }
 
 func (c *Candies) FillModels() error {
-	data, err := os.ReadFile("./model/models.json")
+	data, err := os.ReadFile("./config/config.json")
 	if err != nil {
 		return err
 	}

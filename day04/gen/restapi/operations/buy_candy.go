@@ -62,7 +62,7 @@ func (o *BuyCandy) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 
 // BuyCandyBadRequestBody buy candy bad request body
 //
-// swagger:model BuyCandyBadRequestBody
+// swagger:config BuyCandyBadRequestBody
 type BuyCandyBadRequestBody struct {
 
 	// error
@@ -99,7 +99,7 @@ func (o *BuyCandyBadRequestBody) UnmarshalBinary(b []byte) error {
 
 // BuyCandyBody buy candy body
 //
-// swagger:model BuyCandyBody
+// swagger:config BuyCandyBody
 type BuyCandyBody struct {
 
 	// number of candy
@@ -189,7 +189,7 @@ func (o *BuyCandyBody) UnmarshalBinary(b []byte) error {
 
 // BuyCandyCreatedBody buy candy created body
 //
-// swagger:model BuyCandyCreatedBody
+// swagger:config BuyCandyCreatedBody
 type BuyCandyCreatedBody struct {
 
 	// change
@@ -229,7 +229,7 @@ func (o *BuyCandyCreatedBody) UnmarshalBinary(b []byte) error {
 
 // BuyCandyPaymentRequiredBody buy candy payment required body
 //
-// swagger:model BuyCandyPaymentRequiredBody
+// swagger:config BuyCandyPaymentRequiredBody
 type BuyCandyPaymentRequiredBody struct {
 
 	// error
