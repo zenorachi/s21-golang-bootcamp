@@ -1,7 +1,7 @@
 package main
 
 import (
-	"day04/candy-server/internal/server"
+	"day04/ex00/candy-server/internal/server"
 	"log"
 )
 

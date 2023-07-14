@@ -1,7 +1,7 @@
 package server
 
 import (
-	"day04/candy-server/internal/handler"
+	"day04/ex00/candy-server/internal/handler"
 	"log"
 	"net/http"
 )

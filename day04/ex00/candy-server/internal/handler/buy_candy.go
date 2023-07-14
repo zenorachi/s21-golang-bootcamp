@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"day04/candy-server/config"
+	"day04/ex00/candy-server/config"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -46,7 +46,7 @@ func handlePost(w http.ResponseWriter, r *http.Request) {
 			json.NewDecoder(r.Body).Decode(&post)
 			if _, ok := candies[post.Type]; !ok || post.Count <= 0 || post.Money <= 0 {
 				badResp, _ := json.Marshal(IncorrectRequest{
-					Error: "error: invalid input data",
+					Error: "invalid input data",
 				})
 				w.WriteHeader(http.StatusBadRequest)
 				w.Write(badResp)
