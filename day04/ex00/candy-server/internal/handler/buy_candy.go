@@ -43,7 +43,9 @@ func handlePost(w http.ResponseWriter, r *http.Request) {
 	case http.MethodPost:
 		if r.RequestURI == "/buy_candy" {
 			var post PostJSON
-			json.NewDecoder(r.Body).Decode(&post)
+			if err := json.NewDecoder(r.Body).Decode(&post); err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+			}
 			if _, ok := candies[post.Type]; !ok || post.Count <= 0 || post.Money <= 0 {
 				badResp, _ := json.Marshal(IncorrectRequest{
 					Error: "invalid input data",
