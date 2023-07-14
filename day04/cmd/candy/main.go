@@ -39,16 +39,19 @@ func main() {
 
 			candyMap := candies.GetMapModels()
 
-			money := swag.Int64Value(params.Order.Money)
+			//money := swag.Int64Value(params.Order.Money)
 			candyType := swag.StringValue(params.Order.CandyType)
-			candyCount := swag.Int64Value(params.Order.CandyCount)
+			//candyCount := swag.Int64Value(params.Order.CandyCount)
 
 			if _, ok := candyMap[candyType]; !ok {
-				return middleware.Error(402, nil, nil)
+				kek := &operations.BuyCandyBadRequestBody{Error: "oops... no such candies :("}
+				return operations.NewBuyCandyBadRequest().WithPayload(kek)
 			}
 
 			//greeting := fmt.Sprintf("Hello, %s!", name)
 			//return operations.NewGetGreetingOK().WithPayload(greeting)
+
+			return nil
 		})
 
 	if err = server.Serve(); err != nil {
