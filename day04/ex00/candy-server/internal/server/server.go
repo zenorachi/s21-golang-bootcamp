@@ -10,10 +10,11 @@ type Server struct {
 	httpServer http.Server
 }
 
+// NewServer TODO: add flag to change port
 func NewServer() *Server {
 	return &Server{
 		httpServer: http.Server{
-			Addr:    "127.0.0.1:8080",
+			Addr:    "127.0.0.1:3333",
 			Handler: &handler.Handler{},
 		},
 	}
