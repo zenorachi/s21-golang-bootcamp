@@ -4,6 +4,7 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"day04/ex01/utils"
+	"flag"
 	"fmt"
 	"io"
 	"log"
@@ -17,9 +18,24 @@ const (
 	KeyFile  = "./tls-cfg/client/key.pem"
 )
 
+type RequestFlags struct {
+	k string
+	c int64
+	m int64
+}
+
+var fl RequestFlags
+
+func init() {
+	flag.StringVar(&fl.k, "k", "", "candy type")
+	flag.Int64Var(&fl.c, "c", 0, "candy count")
+	flag.Int64Var(&fl.m, "m", 0, "money given to the machine")
+}
+
 func main() {
+	flag.Parse()
 	client := getClient()
-	requestBody := fmt.Sprintf(`{"money": %d, "candyType": "%s", "candyCount": %d}`, 10, "AA", 1)
+	requestBody := fmt.Sprintf(`{"money": %d, "candyType": "%s", "candyCount": %d}`, fl.m, fl.k, fl.c)
 
 	resp, err := client.Post("https://localhost:8080/buy_candy", "application/json", strings.NewReader(requestBody))
 	if err != nil {
