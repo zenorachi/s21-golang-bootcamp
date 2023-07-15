@@ -1,9 +1,12 @@
-.PHONY: build clean test test1 test2 test3 test4 test5
+.PHONY: build run clean test test1 test2 test3 test4 test5
 
 PORT = 8080
 
 build:
 	go build ./candy-server/cmd/candy
+
+run:
+	go run ./candy-server/cmd/candy/main.go
 
 clean:
 	@rm -rf log1.txt log2.txt log3.txt log4.txt log5.txt true_log1.txt true_log2.txt true_log3.txt true_log4.txt true_log5.txt candy
