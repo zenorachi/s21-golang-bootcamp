@@ -14,8 +14,8 @@ import (
 )
 
 const (
-	CertFile = "./tls-cfg/client/cert.pem"
-	KeyFile  = "./tls-cfg/client/key.pem"
+	CertFile = "./cert/client/cert.pem"
+	KeyFile  = "./cert/client/key.pem"
 )
 
 type RequestFlags struct {
@@ -50,7 +50,7 @@ func main() {
 }
 
 func getClient() *http.Client {
-	data, err := os.ReadFile("./tls-cfg/minica.pem")
+	data, err := os.ReadFile("./cert/minica.pem")
 	if err != nil {
 		log.Fatalln(err)
 	}

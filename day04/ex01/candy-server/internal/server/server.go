@@ -9,9 +9,9 @@ import (
 )
 
 const (
-	CertFile = "./tls-cfg/localhost/cert.pem"
-	KeyFile  = "./tls-cfg/localhost/key.pem"
-	MiniCA   = "./tls-cfg/minica.pem"
+	CertFile = "./cert/localhost/cert.pem"
+	KeyFile  = "./cert/localhost/key.pem"
+	MiniCA   = "./cert/minica.pem"
 )
 
 type Server struct {
