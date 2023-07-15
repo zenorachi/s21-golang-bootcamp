@@ -1,10 +1,8 @@
 package server
 
 import (
-	"crypto/tls"
 	"crypto/x509"
 	"day04/ex01/candy-server/internal/handler"
-	"day04/ex01/utils"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -33,24 +31,17 @@ func NewServer() *Server {
 
 	cp.AppendCertsFromPEM(data)
 
-	tlsCfg := &tls.Config{
-		ClientCAs:      cp,
-		ClientAuth:     tls.RequireAndVerifyClientCert,
-		GetCertificate: utils.CertReqFunc(CertFile, KeyFile),
-	}
-
 	return &Server{
 		httpServer: http.Server{
-			Addr:      ":8080",
-			TLSConfig: tlsCfg,
-			Handler:   &handler.Handler{},
+			Addr:    ":8080",
+			Handler: &handler.Handler{},
 		},
 	}
 }
 
 func (s *Server) Run() error {
 	log.Println("server is running")
-	return s.httpServer.ListenAndServeTLS("", "")
+	return s.httpServer.ListenAndServeTLS(CertFile, KeyFile)
 }
 
 func (s *Server) Stop() error {

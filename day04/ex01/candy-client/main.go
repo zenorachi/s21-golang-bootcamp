@@ -5,9 +5,10 @@ import (
 	"crypto/x509"
 	"day04/ex01/utils"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 )
 
@@ -18,17 +19,22 @@ const (
 
 func main() {
 	client := getClient()
-	kek := strings.NewReader("`{\"money\": 1, \"candyType\": AA, \"candyCount\": 1}`")
-	resp, err := client.Post("https://localhost:8080/buy_candy", "application/json", kek)
+	requestBody := fmt.Sprintf(`{"money": %d, "candyType": "%s", "candyCount": %d}`, 10, "AA", 1)
+
+	resp, err := client.Post("https://localhost:8080/buy_candy", "application/json", strings.NewReader(requestBody))
 	if err != nil {
 		log.Fatalln(err)
 	}
 	defer resp.Body.Close()
-	fmt.Println(resp.Status)
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	fmt.Printf("%s", respBody)
 }
 
 func getClient() *http.Client {
-	data, err := ioutil.ReadFile("./tls-cfg/minica.pem")
+	data, err := os.ReadFile("./tls-cfg/minica.pem")
 	if err != nil {
 		log.Fatalln(err)
 	}
