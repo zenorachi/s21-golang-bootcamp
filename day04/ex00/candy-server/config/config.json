@@ -1,0 +1,24 @@
+{
+  "candies": [
+    {
+      "name": "CE",
+      "price": 10
+    },
+    {
+      "name": "AA",
+      "price": 15
+    },
+    {
+      "name": "NT",
+      "price": 17
+    },
+    {
+      "name": "DE",
+      "price": 21
+    },
+    {
+      "name": "YR",
+      "price": 23
+    }
+  ]
+}
