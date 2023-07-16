@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestTreeFalse1(t *testing.T) {
+func TestTreeFalse(t *testing.T) {
 	t.Run("Three nodes", func(t *testing.T) {
 		/*
 			  1
