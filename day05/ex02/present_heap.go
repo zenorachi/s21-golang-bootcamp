@@ -1,4 +1,4 @@
-package main
+package ph
 
 type Present struct {
 	Value int
