@@ -1,30 +1,24 @@
-package main
+package tree
 
-import "errors"
-
-type TreeNode struct {
+type Node struct {
 	HasToy bool
-	Left   *TreeNode
-	Right  *TreeNode
+	Left   *Node
+	Right  *Node
 }
 
-func create(toy bool) *TreeNode {
-	return &TreeNode{
+func Create(toy bool) *Node {
+	return &Node{
 		HasToy: toy,
 		Left:   nil,
 		Right:  nil,
 	}
 }
 
-func areToysBalanced(root *TreeNode) (bool, error) {
-	if root == nil {
-		return false, errors.New("root pointer cannot be nil")
-	}
-
-	return getToysCount(root.Left) == getToysCount(root.Right), nil
+func AreToysBalanced(root *Node) bool {
+	return getToysCount(root.Left) == getToysCount(root.Right)
 }
 
-func getToysCount(tree *TreeNode) int {
+func getToysCount(tree *Node) int {
 	if tree == nil {
 		return 0
 	}
