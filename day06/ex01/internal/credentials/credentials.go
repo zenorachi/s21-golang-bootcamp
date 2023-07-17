@@ -34,7 +34,7 @@ func init() {
 }
 
 func getDataFromCredentials() error {
-	file, err := os.Open("./internal/admin_credentials.txt")
+	file, err := os.Open("./internal/credentials/admin_credentials.txt")
 	if err != nil {
 		return err
 	}
