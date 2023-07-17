@@ -46,7 +46,9 @@ func HandleAdmin(w http.ResponseWriter, r *http.Request) {
 	} else {
 		log.Println("not success")
 	}
-	tmplAuth.Execute(w, data)
+	if err := tmplAuth.Execute(w, data); err != nil {
+		log.Println(err)
+	}
 }
 
 func validateAdmin(login, password string) bool {
