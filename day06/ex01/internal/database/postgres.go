@@ -2,11 +2,14 @@ package database
 
 import (
 	"database/sql"
+	"day06/ex01/internal/credentials"
+	"fmt"
 	_ "github.com/lib/pq"
 )
 
 func runDB() (*sql.DB, error) {
-	db, err := sql.Open("postgres", "postgres://postgres:@localhost:8080/myblog?sslmode=disable")
+	db, err := sql.Open("postgres",
+		fmt.Sprintf("%s://%s:@localhost:8080/myblog?sslmode=disable", credentials.AC.DBUser, credentials.AC.DBName))
 	if err != nil {
 		return nil, err
 	}
