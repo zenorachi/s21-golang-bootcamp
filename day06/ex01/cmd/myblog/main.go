@@ -11,10 +11,9 @@ import (
 )
 
 type AdminContent struct {
-	Login         string
-	Password      string
-	Clicked       bool
-	StorageAccess string
+	Login    string
+	Password string
+	Success  bool
 }
 
 type AdminCredentials struct {
@@ -25,8 +24,9 @@ type AdminCredentials struct {
 }
 
 var (
-	ac   AdminCredentials
-	tmpl = template.Must(template.ParseFiles("./ui/html/admin.html"))
+	ac       AdminCredentials
+	tmplAuth = template.Must(template.ParseFiles("./ui/html/admin.html"))
+	//tmplPanel = template.Must(template.ParseFiles("./ui/html/panel.html"))
 )
 
 func init() {
@@ -47,12 +47,13 @@ func handle(w http.ResponseWriter, r *http.Request) {
 		Password: r.FormValue("password"),
 	}
 
-	tmpl.Execute(w, data)
 	if validateAdmin(data.Login, data.Password) {
+		data.Success = true
 		log.Println("success")
 	} else {
 		log.Println("not success")
 	}
+	tmplAuth.Execute(w, data)
 }
 
 func validateAdmin(login, password string) bool {
