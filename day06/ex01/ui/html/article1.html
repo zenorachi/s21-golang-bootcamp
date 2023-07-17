@@ -10,7 +10,7 @@
 <body>
 <div id="output"></div>
 <script>
-    fetch('./article1.md')
+    fetch('./article#1.md')
         .then(response => response.text())
         .then(markdown => {
             document.querySelector('#output').innerHTML = marked(markdown);
