@@ -12,7 +12,6 @@ import (
 type AdminContent struct {
 	Login    string
 	Password string
-	Success  bool
 }
 
 type AdminCredentials struct {
