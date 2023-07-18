@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sense</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked@2.1.3/marked.min.js"></script>
+</head>
+<body>
+<div id="output"></div>
+<script>
+    fetch('../md/a1.md')
+        .then(response => response.text())
+        .then(markdown => {
+            document.querySelector('#output').innerHTML = marked(markdown);
+        });
+</script>
+<button>
+    <a href="/" class="button">Back</a>
+</button>
+</body>
+</html>
