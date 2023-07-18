@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"day06/ex01/internal/credentials"
+	"day06/ex01/internal/database"
 	"log"
 	"net/http"
 )
@@ -14,9 +15,16 @@ func HandleAdmin(w http.ResponseWriter, r *http.Request) {
 
 	if validateAdmin(data.Login, data.Password) {
 		http.ServeFile(w, r, "./ui/html/admin.html")
-		data.Success = true
+		articleName := r.FormValue("articleName")
+		articleLink := r.FormValue("articleLink")
+		if articleName != "" {
+			if err := database.InsertArticle(articleName, articleLink); err != nil {
+				log.Println(err)
+			}
+		}
 		log.Println("logged in as admin")
 	}
+
 	if err := credentials.TmplAuth.Execute(w, data); err != nil {
 		log.Println(err)
 	}
