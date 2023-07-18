@@ -24,7 +24,7 @@ type AdminCredentials struct {
 
 var (
 	AC       AdminCredentials
-	TmplAuth = template.Must(template.ParseFiles("./ui/html/admin.html"))
+	TmplAuth = template.Must(template.ParseFiles("./ui/html/authentication.html"))
 )
 
 func init() {

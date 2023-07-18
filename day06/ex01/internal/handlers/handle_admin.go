@@ -13,6 +13,7 @@ func HandleAdmin(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if validateAdmin(data.Login, data.Password) {
+		http.ServeFile(w, r, "./ui/html/admin.html")
 		data.Success = true
 		log.Println("logged in as admin")
 	}
