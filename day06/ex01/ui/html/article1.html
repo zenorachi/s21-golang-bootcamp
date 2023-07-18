@@ -10,23 +10,14 @@
 <body>
 <div id="output"></div>
 <script>
-    fetch('./article#1.md')
+    fetch('../md/a1.md')
         .then(response => response.text())
         .then(markdown => {
             document.querySelector('#output').innerHTML = marked(markdown);
         });
 </script>
-<a href="/" class="button">Back</a>
-<style type="text/css">
-    .button {
-        display: inline-block;
-        padding: 8px 16px;
-        background-color: #ccc;
-        color: #fff;
-        text-decoration: none;
-        border: none;
-        cursor: pointer;
-    }
-</style>
+<button>
+    <a href="/" class="button">Back</a>
+</button>
 </body>
 </html>

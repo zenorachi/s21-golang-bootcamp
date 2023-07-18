@@ -6,14 +6,19 @@ import (
 	"net/http"
 )
 
+const PORT = "8888"
+
 func main() {
-	fs := http.FileServer(http.Dir("./ui/img"))
-	http.Handle("/img/", http.StripPrefix("/img/", fs))
+	img := http.FileServer(http.Dir("./ui/img"))
+	http.Handle("/img/", http.StripPrefix("/img/", img))
+
+	md := http.FileServer(http.Dir("./ui/md/"))
+	http.Handle("/md/", http.StripPrefix("/md/", md))
 
 	http.HandleFunc("/", handlers.HandleDefault)
 
 	http.HandleFunc("/admin", handlers.HandleAdmin)
 
-	log.Println("Server started ...")
-	log.Fatalln(http.ListenAndServe("localhost:7777", nil))
+	log.Println("Server started at PORT:", PORT+"...")
+	log.Fatalln(http.ListenAndServe("localhost:"+PORT, nil))
 }
