@@ -7,8 +7,13 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/admin", handlers.HandleAdmin)
+	fs := http.FileServer(http.Dir("./ui/img"))
+	http.Handle("/img/", http.StripPrefix("/img/", fs))
+
 	http.HandleFunc("/", handlers.HandleDefault)
+
+	http.HandleFunc("/admin", handlers.HandleAdmin)
+
 	log.Println("Server started ...")
-	log.Fatalln(http.ListenAndServe("localhost:8888", nil))
+	log.Fatalln(http.ListenAndServe("localhost:7777", nil))
 }

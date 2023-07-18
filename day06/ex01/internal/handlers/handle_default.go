@@ -9,13 +9,14 @@ import (
 //var tmplMain = template.Must(template.ParseFiles("./ui/html/articles.html"))
 
 func HandleDefault(w http.ResponseWriter, r *http.Request) {
+
 	if r.URL.Path == "/article1.html" {
 		http.ServeFile(w, r, "./ui/html/article1.html")
 	}
 	if r.URL.Path == "/" {
 		http.ServeFile(w, r, "./ui/html/articles.html")
 	}
-	// todo: articles
+	//todo: articles
 	_, err := database.GetArticles()
 	if err != nil {
 		log.Fatalln(err)
