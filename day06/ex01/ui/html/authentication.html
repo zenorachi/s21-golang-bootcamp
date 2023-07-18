@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication</title>
+</head>
+<body>
+    <div class="container">
+        <div class="registration-cssave">
+            <form method="GET">
+                <h3 class="text-center">Admin personal account</h3>
+                <div class="form-group">
+                    <input class="form-control item" type="text" name="login" maxlength="15" minlength="4" pattern="^[a-zA-Z0-9_.-]*$" id="username" placeholder="Login" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control item" type="password" name="password" minlength="6" id="password" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block create-account" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

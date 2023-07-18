@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="button-div">
+  <form method="POST">
+    <h3 class="text-center">Admin panel</h3>
+    <div class="my-form-group">
+      <input class="form-control item" type="text" name="articleName" maxlength="128" minlength="4" pattern="^[a-zA-Z0-9_.-]*$" placeholder="Name" required>
+      <input class="form-control item" type="text" name="articleLink" maxlength="128" minlength="4" pattern="^[a-zA-Z0-9_.-]*$" placeholder="Link (.md file)" required>
+    </div>
+    <div class="my-form-group">
+      <button class="btn btn-primary btn-block add-article" type="submit">Add article</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>
