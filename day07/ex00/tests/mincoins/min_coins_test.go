@@ -1,6 +1,7 @@
-package ex00
+package mincoins
 
 import (
+	"day07/ex00"
 	"reflect"
 	"testing"
 )
@@ -18,7 +19,7 @@ func TestMinCoinsCorrect(t *testing.T) {
 		coins = []int{1, 5, 10}
 		expectedResult = []int{10, 1, 1, 1}
 
-		realResult = minCoins(val, coins)
+		realResult = ex00.MinCoins(val, coins)
 		if !reflect.DeepEqual(expectedResult, realResult) {
 			t.Errorf("[Expected] %v != %v [Real]\n", expectedResult, realResult)
 		}
@@ -29,7 +30,7 @@ func TestMinCoinsCorrect(t *testing.T) {
 		coins = []int{1, 5, 10}
 		expectedResult = []int{10, 5}
 
-		realResult = minCoins(val, coins)
+		realResult = ex00.MinCoins(val, coins)
 		if !reflect.DeepEqual(expectedResult, realResult) {
 			t.Errorf("[Expected] %v != %v [Real]\n", expectedResult, realResult)
 		}
@@ -49,7 +50,7 @@ func TestMinCoinsIncorrect(t *testing.T) {
 		coins = []int{1, 6, 10}
 		expectedResult = []int{6, 6}
 
-		realResult = minCoins(val, coins)
+		realResult = ex00.MinCoins(val, coins)
 		if !reflect.DeepEqual(expectedResult, realResult) {
 			t.Errorf("[Expected] %v != %v [Real]\n", expectedResult, realResult)
 		}
@@ -60,7 +61,7 @@ func TestMinCoinsIncorrect(t *testing.T) {
 		coins = []int{1, 2, 12, 18}
 		expectedResult = []int{12, 12}
 
-		realResult = minCoins(val, coins)
+		realResult = ex00.MinCoins(val, coins)
 		if !reflect.DeepEqual(expectedResult, realResult) {
 			t.Errorf("[Expected] %v != %v [Real]\n", expectedResult, realResult)
 		}
@@ -68,10 +69,21 @@ func TestMinCoinsIncorrect(t *testing.T) {
 
 	t.Run("Case#3", func(t *testing.T) {
 		val = 25
-		coins = []int{10, 5}
+		coins = []int{10, 5, 1}
 		expectedResult = []int{10, 10, 5}
 
-		realResult = minCoins(val, coins)
+		realResult = ex00.MinCoins(val, coins)
+		if !reflect.DeepEqual(expectedResult, realResult) {
+			t.Errorf("[Expected] %v != %v [Real]\n", expectedResult, realResult)
+		}
+	})
+
+	t.Run("Case#4", func(t *testing.T) {
+		val = 6
+		coins = []int{2, 2, 3, 3, 4, 5, 10, 10, 10, 100, 1000000}
+		expectedResult = []int{2, 4}
+
+		realResult = ex00.MinCoins(val, coins)
 		if !reflect.DeepEqual(expectedResult, realResult) {
 			t.Errorf("[Expected] %v != %v [Real]\n", expectedResult, realResult)
 		}
