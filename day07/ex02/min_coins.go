@@ -39,6 +39,21 @@ func MinCoins(val int, coins []int) []int {
 /*
 MinCoins2 - new version of MinCoins.
 It runs a bit faster and handles cases that the first version of it doesn't handle (you can see these cases in ex00/tests).
+
+Some reasons, why MinCoins2 is better than MinCoins:
+	1. MinCoins2 is faster.
+       The algorithm in the MinCoins2 function performs the computation only once for each sum from 1 to val.
+       While the algorithm in the MinCoins function uses two nested loops to calculate the sum at each iteration.
+       This makes the MinCoins2 algorithm more time efficient.
+	2. Dynamic programming.
+       The algorithm in the MinCoins2 function uses the dynamic programming method to find the optimal solution.
+       It builds an array of sums that contains the minimum number of coins for each sum from 1 to val.
+       This avoids repeated computations and solves the problem more efficiently,
+       especially for large values of val and complex coin sets.
+	3. Correctness.
+       The algorithm in the MinCoins2 function guarantees that an optimal solution is found.
+       It checks that the optimal number of coins for a given val exists before continuing the computation.
+       If no optimal solution exists, it will return an empty slice.
 */
 func MinCoins2(val int, coins []int) (result []int) {
 	// Check for incorrect input.
