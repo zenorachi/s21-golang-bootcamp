@@ -16,8 +16,10 @@ import "math"
 
 /*
 MinCoins - default function, which is given as an example and works incorrectly with some cases.
+
 For example:
 coins = []int{1, 2, 12, 18}, val = 24. Function output will be {18, 1, 1, 1, 1}, although it should be {12, 12}.
+
 This is because it uses a greedy algorithm that takes the largest coin denomination if it does not exceed the val value.
 In addition to such cases, cases are not processed when coins = nil or coins = {}.
 */
@@ -34,16 +36,23 @@ func MinCoins(val int, coins []int) []int {
 	return res
 }
 
+/*
+MinCoins2 - new version of MinCoins.
+It runs a bit faster and handles cases that the first version of it doesn't handle (you can see these cases in ex00/tests).
+*/
 func MinCoins2(val int, coins []int) (result []int) {
+	// Check for incorrect input.
 	if len(coins) == 0 || val <= 0 || coins == nil {
 		return []int{}
 	}
 
+	// Create the slice to store... TODO
 	sums := make([]int, val+1)
 	for i := 1; i <= val; i++ {
 		sums[i] = math.MaxUint32
 	}
 
+	// For loop for... TODO
 	for sum := 1; sum <= val; sum++ {
 		for _, coin := range coins {
 			if sum >= coin && sums[sum-coin]+1 < sums[sum] {
@@ -52,16 +61,17 @@ func MinCoins2(val int, coins []int) (result []int) {
 		}
 	}
 
+	// Check that we really can find the optimal solution.
 	if sums[val] == math.MaxInt {
 		return []int{}
 	}
 
-	kek := val
-	for kek > 0 {
+	// For loop for... TODO
+	for val > 0 {
 		for _, coin := range coins {
-			if kek >= coin && sums[kek-coin] == sums[kek]-1 {
+			if val >= coin && sums[val-coin] == sums[val]-1 {
 				result = append(result, coin)
-				kek -= coin
+				val -= coin
 				break
 			}
 		}

@@ -37,12 +37,11 @@ func MinCoins2(val int, coins []int) (result []int) {
 		return []int{}
 	}
 
-	kek := val
-	for kek > 0 {
+	for val > 0 {
 		for _, coin := range coins {
-			if kek >= coin && sums[kek-coin] == sums[kek]-1 {
+			if val >= coin && sums[val-coin] == sums[val]-1 {
 				result = append(result, coin)
-				kek -= coin
+				val -= coin
 				break
 			}
 		}
