@@ -61,13 +61,23 @@ func MinCoins2(val int, coins []int) (result []int) {
 		return []int{}
 	}
 
-	// Create the slice to store... TODO
+	/*
+		Create sums slice of length val+1,
+		where sums[i] will contain the minimum number of coins for the set of sum i.
+		Initialize all array elements with the value math.MaxUint32 to make sure
+		that the elements for which no optimal set of coins is found will remain with the maximum value.
+	*/
 	sums := make([]int, val+1)
 	for i := 1; i <= val; i++ {
 		sums[i] = math.MaxUint32
 	}
 
-	// For loop for... TODO
+	/*
+		This loop considers each sum 'sum' from 1 to val and for each sum iterates over all coins in the set coins.
+		For each sum 'sum', we check if some coin from the set of coins can improve the current sums[sum]
+		for the set of that sum. If it can, we update sums[sum] to sums[sum-coin]+1,
+		which means that we have found a better solution for that sum.
+	*/
 	for sum := 1; sum <= val; sum++ {
 		for _, coin := range coins {
 			if sum >= coin && sums[sum-coin]+1 < sums[sum] {
@@ -81,7 +91,14 @@ func MinCoins2(val int, coins []int) (result []int) {
 		return []int{}
 	}
 
-	// For loop for... TODO
+	/*
+		This loop reconstructs the optimal set of coins for a given amount val.
+		We start with val and at each iteration we select the coin 'coin' that caused the minimum number of coins
+		to decrease for the current amount val.
+		We then add that coin to the result and reduce val by its denomination to move on to the next sum.
+		In the end, the result variable will contain the optimal set of coins for the set of sum val,
+		and the minimum number of coins for that sum will be sums[val].
+	*/
 	for val > 0 {
 		for _, coin := range coins {
 			if val >= coin && sums[val-coin] == sums[val]-1 {
@@ -92,5 +109,6 @@ func MinCoins2(val int, coins []int) (result []int) {
 		}
 	}
 
+	// Return the result
 	return result
 }
