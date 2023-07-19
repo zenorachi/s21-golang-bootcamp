@@ -2,10 +2,10 @@
 How to reproduce docs generation:
 	First way:
 		1. Install the godoc util: go get golang.org/x/tools/cmd/godoc
-		2. Run the command: $ ~/go/bin/godoc -http=:6060 or $ make dvi
+		2. Run the command: $ make doc or $ ~/go/bin/godoc -http=:6060
 		3. Go to http://localhost:6060/pkg/day07/ex02, and you will see the documentation for the mincoins package.
 	Second way:
-		1. Run the command: $ make extract-docs
+		1. Run the command: $ make extract-doc
 		2. Open index.html
 */
 
