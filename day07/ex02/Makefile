@@ -6,8 +6,8 @@ install:
 doc:
 	@~/go/bin/godoc -http=:6060
 
-zip-docs:
-	@curl -s -o . $(SRC)
+zip-doc:
+	@curl -s -o index.html $(SRC)
 	@zip docs.zip index.html
 	@rm index.html
 
@@ -17,5 +17,5 @@ extract-doc:
 clean:
 	@rm ./index.html
 
-.PHONY: doc zip-docs extract-doc clean
+.PHONY: doc zip-doc extract-doc clean
 .DEFAULT_GOAL: doc
