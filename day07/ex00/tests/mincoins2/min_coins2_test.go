@@ -121,4 +121,25 @@ func TestMinCoins2Incorrect(t *testing.T) {
 			t.Errorf("[Expected] %v != %v [Real]\n", expectedResult, realResult)
 		}
 	})
+
+	t.Run("Case#8", func(t *testing.T) {
+		val = -15
+		expectedResult = []int{}
+
+		realResult = ex00.MinCoins2(val, nil)
+		if !reflect.DeepEqual(expectedResult, realResult) {
+			t.Errorf("[Expected] %v != %v [Real]\n", expectedResult, realResult)
+		}
+	})
+
+	t.Run("Case#9", func(t *testing.T) {
+		val = 1500
+		coins = []int{1, 2, 3, 4, 4, 6, 5, 100, 90, -900, 1400}
+		expectedResult = []int{100, 1400}
+
+		realResult = ex00.MinCoins2(val, coins)
+		if !reflect.DeepEqual(expectedResult, realResult) {
+			t.Errorf("[Expected] %v != %v [Real]\n", expectedResult, realResult)
+		}
+	})
 }

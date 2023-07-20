@@ -109,7 +109,7 @@ func MinCoins2(val int, coins []int) (result []int) {
 	*/
 	for sum := 1; sum <= val; sum++ {
 		for _, coin := range coins {
-			if sum >= coin && sums[sum-coin]+1 < sums[sum] {
+			if coin >= 0 && sum >= coin && sums[sum-coin]+1 < sums[sum] {
 				sums[sum] = sums[sum-coin] + 1
 			}
 		}
@@ -130,7 +130,7 @@ func MinCoins2(val int, coins []int) (result []int) {
 	*/
 	for val > 0 {
 		for _, coin := range coins {
-			if val >= coin && sums[val-coin] == sums[val]-1 {
+			if coin >= 0 && val >= coin && sums[val-coin] == sums[val]-1 {
 				result = append(result, coin)
 				val -= coin
 				break
