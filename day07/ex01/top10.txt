@@ -1,0 +1,29 @@
+Type: cpu
+Time: Jul 20, 2023 at 6:13pm (MSK)
+Duration: 1s, Total samples = 1.41s (140.41%)
+Showing nodes accounting for 1.41s, 100% of 1.41s total
+      flat  flat%   sum%        cum   cum%
+     0.22s 15.60% 15.60%      0.22s 15.60%  runtime.madvise
+     0.20s 14.18% 29.79%      0.21s 14.89%  runtime.pthread_cond_wait
+     0.18s 12.77% 42.55%      0.18s 12.77%  runtime.memmove
+     0.16s 11.35% 53.90%      0.17s 12.06%  runtime.kevent
+     0.14s  9.93% 63.83%      0.14s  9.93%  runtime.pthread_kill
+     0.12s  8.51% 72.34%      0.12s  8.51%  runtime.pthread_cond_signal
+     0.08s  5.67% 78.01%      0.09s  6.38%  runtime.pthread_cond_timedwait_relative_np
+     0.05s  3.55% 81.56%      0.05s  3.55%  runtime.procyield
+     0.04s  2.84% 84.40%      0.04s  2.84%  runtime.libcCall
+     0.03s  2.13% 86.52%      0.24s 17.02%  day07/ex02.MinCoins (inline)
+     0.03s  2.13% 88.65%      0.05s  3.55%  runtime.scanblock
+     0.02s  1.42% 90.07%      0.02s  1.42%  runtime.memclrNoHeapPointers
+     0.02s  1.42% 91.49%      0.03s  2.13%  runtime.nanotime1
+     0.02s  1.42% 92.91%      0.03s  2.13%  runtime.scanobject
+     0.01s  0.71% 93.62%      0.01s  0.71%  runtime.(*lfstack).pop (inline)
+     0.01s  0.71% 94.33%      0.01s  0.71%  runtime.(*lfstack).push
+     0.01s  0.71% 95.04%      0.01s  0.71%  runtime.(*pallocBits).summarize
+     0.01s  0.71% 95.74%      0.01s  0.71%  runtime.arenaIndex (inline)
+     0.01s  0.71% 96.45%      0.02s  1.42%  runtime.getempty
+     0.01s  0.71% 97.16%      0.21s 14.89%  runtime.growslice
+     0.01s  0.71% 97.87%      0.01s  0.71%  runtime.heapBits.next (inline)
+     0.01s  0.71% 98.58%      0.01s  0.71%  runtime.pcvalue
+     0.01s  0.71% 99.29%      0.01s  0.71%  runtime.runtimer
+     0.01s  0.71%   100%      0.01s  0.71%  runtime.unlock2
