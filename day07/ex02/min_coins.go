@@ -38,6 +38,7 @@ func MinCoins(val int, coins []int) []int {
 
 /*
 MinCoins2 - new version of MinCoins.
+
 It runs a bit faster and handles cases that the first version of it doesn't handle (you can see these cases in ex00/tests).
 
 Some reasons, why MinCoins2 is better than MinCoins:
@@ -115,7 +116,7 @@ func MinCoins2(val int, coins []int) (result []int) {
 	}
 
 	// Check that we really can find the optimal solution.
-	if sums[val] == math.MaxInt {
+	if sums[val] == math.MaxUint32 {
 		return []int{}
 	}
 
