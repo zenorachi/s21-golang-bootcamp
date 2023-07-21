@@ -3,39 +3,41 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"sync"
 	"time"
 )
 
 func main() {
 	var (
-		ch   chan int
-		done = make(chan struct{})
-		arr  []int
+		ch  chan int
+		arr []int
 	)
 
 	arr = getRandomData(10)
 	fmt.Println(arr)
 
 	ch = sleepSort(arr)
-	go func() {
-		for i := 0; i < len(arr); i++ {
-			fmt.Println(<-ch)
-		}
-		done <- struct{}{}
-	}()
-
-	<-done
+	for i := range ch {
+		fmt.Println(i)
+	}
 }
 
 func sleepSort(arr []int) chan int {
 	ch := make(chan int)
+	wg := new(sync.WaitGroup)
 	for i := 0; i < len(arr); i++ {
 		val := arr[i]
+		wg.Add(1)
 		go func() {
+			defer wg.Done()
 			time.Sleep(time.Duration(val) * time.Second)
 			ch <- val
 		}()
 	}
+	go func() {
+		wg.Wait()
+		close(ch)
+	}()
 	return ch
 }
 
