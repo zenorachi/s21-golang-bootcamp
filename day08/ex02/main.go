@@ -23,5 +23,6 @@ func main() {
 	C.Window_MakeKeyAndOrderFront(wPtr)
 
 	defer C.free(unsafe.Pointer(title))
+	defer C.free(unsafe.Pointer(wPtr))
 	C.RunApplication()
 }
