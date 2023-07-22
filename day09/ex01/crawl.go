@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"sync"
@@ -10,44 +9,35 @@ import (
 
 const MaxConcurrency = 8
 
-func crawlWeb(ctx context.Context, input chan string, done chan struct{}) chan *string {
+func crawlWeb(ctx context.Context, urls <-chan string) chan *string {
+	results := make(chan *string)
+	go runRoutines(ctx, urls, results)
+	return results
+}
+
+func runRoutines(ctx context.Context, urls <-chan string, res chan<- *string) {
 	semaphore := make(chan struct{}, MaxConcurrency)
-	output := make(chan *string)
-	var wg sync.WaitGroup
+	wg := &sync.WaitGroup{}
 
-	go func() {
-		defer close(output)
-		for {
-			select {
-			case url, ok := <-input:
-				if !ok {
-					// input channel closed, no more URLs to process
-					wg.Wait() // Wait for all goroutines to complete
-					done <- struct{}{}
-					return
+	for url := range urls {
+		select {
+		case <-ctx.Done():
+			break
+		case semaphore <- struct{}{}:
+			wg.Add(1)
+			go func(u string) {
+				defer wg.Done()
+				body, err := fetchURL(u)
+				if err == nil {
+					res <- &body
 				}
-
-				wg.Add(1)
-				go func(url string) {
-					defer wg.Done()
-					semaphore <- struct{}{} // acquire semaphore
-
-					body, err := fetchURL(url)
-					if err == nil {
-						output <- &body
-					}
-
-					<-semaphore // release semaphore
-				}(url)
-
-			case <-ctx.Done():
-				// Cancel the crawling process
-				return
-			}
+				<-semaphore
+			}(url)
 		}
-	}()
+	}
 
-	return output
+	wg.Wait()
+	close(res)
 }
 
 func fetchURL(url string) (string, error) {
@@ -62,13 +52,4 @@ func fetchURL(url string) (string, error) {
 	}
 
 	return string(body), nil
-}
-
-func handleOutput(output chan *string) {
-	for bodyPtr := range output {
-		if bodyPtr != nil {
-			body := *bodyPtr
-			fmt.Printf("Received body:%s\n", body)
-		}
-	}
 }

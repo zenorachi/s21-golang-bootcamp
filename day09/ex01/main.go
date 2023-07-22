@@ -9,45 +9,30 @@ import (
 )
 
 func main() {
-	// Prepare a context to manage the goroutines and enable cancellation
-	ctx, cancelFunc := context.WithCancel(context.Background())
-	defer cancelFunc()
 
-	input := make(chan string)
-	done := make(chan struct{})
+	urls := make(chan string)
 
-	// Start the crawling process and receive the output channel
-	output := crawlWeb(ctx, input, done)
+	go func() {
+		for i := 0; i < 100; i++ {
+			urls <- "https://www.example.com"
+		}
+		close(urls)
+	}()
 
-	// Start handling the output concurrently
-	go handleOutput(output)
-
-	// Add URLs to the input channel for crawling
-	urls := []string{
-		"https://example.com",
-		"https://example.com/page1",
-		"https://example.com/page2",
-		// Add more URLs as needed...
-	}
-
-	for _, url := range urls {
-		input <- url
-	}
-
-	close(input)
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
 
 	sigChan := make(chan os.Signal)
 	signal.Notify(sigChan, os.Interrupt, syscall.SIGTERM)
-	select {
-	case <-ctx.Done():
-		fmt.Println("Context is done. Crawling process completed.")
-	case <-sigChan:
-		fmt.Println("\nTerminating the crawling process...")
-		cancelFunc()
-	case <-done:
-	}
 
-	// Wait for the handleOutput goroutine to complete
-	// to make sure all the results have been printed
-	<-output
+	go func() {
+		<-sigChan
+		fmt.Println("Crawling interrupted. Stopping gracefully...")
+		cancel()
+	}()
+
+	bodies := crawlWeb(ctx, urls)
+	for b := range bodies {
+		fmt.Println(*b)
+	}
 }
