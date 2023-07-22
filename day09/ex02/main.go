@@ -6,13 +6,15 @@ import (
 	ctfmt "github.com/daviddengcn/go-colortext/fmt"
 )
 
+const TotalGoroutines = 150_000
+
 func main() {
 	input1 := make(chan interface{})
 	input2 := make(chan interface{})
 	input3 := make(chan interface{})
 
 	go func() {
-		for i := 0; i < 50000; i++ {
+		for i := 0; i < TotalGoroutines/3; i++ {
 			input1 <- i
 			input2 <- i * 10
 			input3 <- i * 100
@@ -30,7 +32,7 @@ func main() {
 		fmt.Println(data)
 	}
 
-	if c == 150_000 {
+	if c == TotalGoroutines {
 		ctfmt.Printf(ct.Green, true, "--- All goroutines (%d) are proceeded ---\n", c)
 	} else {
 		ctfmt.Printf(ct.Red, true, "--- Unexpected error, (%d) goroutines are proceeded ---\n", c)
