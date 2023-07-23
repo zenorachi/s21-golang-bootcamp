@@ -16,3 +16,9 @@ type Node struct {
 	Host string `json:"host"`
 	Port string `json:"port"`
 }
+
+type ClientRequest struct {
+	Command string `json:"command"`
+	Key     string `json:"key"`
+	Value   string `json:"value,omitempty"`
+}
